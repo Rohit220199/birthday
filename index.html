@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎉 Happy Birthday Riya 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      font-style: italic;
+      font-size: 1.4em;
+      background-color: black;
+      color: white;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    #countdown {
+      font-size: 2em;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #mainContent {
+      display: none;
+      background: url('https://i.postimg.cc/SRjyk3PR/Snapchat-1985575372.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding-top: 60px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 5px #000;
+      color: white;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 90%;
+      color: white;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: white;
+      animation: blink 0.7s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .gift {
+      font-size: 2.2em;
+      margin-top: 20px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .gift:hover {
+      transform: scale(1.2);
+    }
+
+    #lyrics {
+      white-space: pre-wrap;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 24px;
+      color: red;
+      animation: float 5s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    .firework {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: yellow;
+      z-index: 10;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(10); }
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown"></div>
+
+  <div id="mainContent">
+    <h1>🎉 Happy Birthday Riya 🎉</h1>
+    <div class="container">
+      <div id="typing"></div><div class="cursor">|</div>
+      <div id="gift" class="gift">🎁 Tap for Surprise Music</div>
+      <div id="lyrics"></div>
+      <audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    </div>
+  </div>
+
+  <script>
+    // Unlock at 12 July 12:35 AM local time
+    const unlockTime = new Date(2025, 6, 13, 1, 0, 0).getTime();
+// 6 = July because months are 0-based in JavaScript
+
+    const countdownEl = document.getElementById("countdown");
+    const mainEl = document.getElementById("mainContent");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = unlockTime - now;
+
+      if (distance <= 0) {
+        countdownEl.style.display = "none";
+        mainEl.style.display = "flex";
+        setTimeout(typeMessage, 500);
+      } else {
+const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdownEl.innerHTML = `⏳ Unlocking in  ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        setTimeout(updateCountdown, 1000);
+      }
+    }
+
+    const messages = [
+      "🎂 Happy Birthday My Love ❤️",
+      "🌟 I love you jaan...",
+      "💖 I'm missing you baby...",
+      "Tu hai toh sab kuch perfect lagta hai 💕",
+      " 💕💖  you are reason for my inner core strength ... 💕💗🖤",
+"💖 I can't even express what you have done for me 🥹 💗💗",
+" 💝 tu mere life me tb aayi jb mujhe sabse jyada jrrurat thi even you stayed with me always 💕",
+      "You're the reason for my smile 😘",
+      "🎁 A surprise just for you..."
+    ];
+
+    const lyrics = [
+      "🎶 Tum ho mera pyaar 💞",
+      "🎶 Tumse hai khumar 🥰",
+      "🎶 Tumko hi basaya maine yaadon mein 💖",
+      "🎶 Tum ho mere pyaar 💘"
+    ];
+
+    const typingEl = document.getElementById("typing");
+    const giftEl = document.getElementById("gift");
+    const lyricsEl = document.getElementById("lyrics");
+    const audioEl = document.getElementById("audio");
+
+    let msgIndex = 0;
+    let charIndex = 0;
+
+    function typeMessage() {
+      if (msgIndex < messages.length) {
+        const current = messages[msgIndex];
+        if (charIndex < current.length) {
+          typingEl.textContent += current.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeMessage, 50);
+        } else {
+          typingEl.textContent += "\n";
+          msgIndex++;
+          charIndex = 0;
+          setTimeout(typeMessage, 1000);
+        }
+      } else {
+        document.querySelector('.cursor').style.display = 'none';
+        giftEl.style.display = 'block';
+      }
+    }
+
+    giftEl.addEventListener("click", () => {
+      giftEl.style.display = "none";
+      lyricsEl.style.display = "block";
+      audioEl.play();
+      showLyrics(0);
+      startFireworks();
+    });
+
+    function showLyrics(i) {
+      if (i < lyrics.length) {
+        lyricsEl.textContent += lyrics[i] + "\n";
+        setTimeout(() => showLyrics(i + 1), 2500);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.innerText = "❤️";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    function createFireworkBurst() {
+      for (let i = 0; i < 30; i++) {
+        const fw = document.createElement('div');
+        fw.classList.add('firework');
+        fw.style.left = Math.random() * window.innerWidth + "px";
+        fw.style.top = Math.random() * window.innerHeight + "px";
+        fw.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+      }
+    }
+
+    function startFireworks() {
+      createFireworkBurst();
+      setInterval(createFireworkBurst, 2000);
+    }
+
+    setInterval(createHeart, 150);
+    updateCountdown();
+  </script>
+</body>
+</html>
