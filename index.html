@@ -15,8 +15,19 @@
   text-align: center;
 }
 
+#countdown {
+  font-size: 2em;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #mainContent {
-  display: flex;
+  display: none;
   background: url('https://i.postimg.cc/SRjyk3PR/Snapchat-1985575372.jpg') no-repeat center center fixed;
   background-size: cover;
   position: relative;
@@ -150,7 +161,7 @@ h1 {
 </audio>
 
   </div>  <script>
-    const unlockTime = new Date(2025, 6, 27, 0, 0, 0).getTime();
+    const unlockTime = new Date(2025, 6, 17, 0, 0, 0).getTime();
     const countdownEl = document.getElementById("countdown");
     const mainEl = document.getElementById("mainContent");
     const startBtn = document.getElementById("startButton");
@@ -163,6 +174,7 @@ h1 {
         countdownEl.style.display = "none";
         mainEl.style.display = "flex";
         setTimeout(typeMessage, 500);
+startAnimation();
       } else {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -245,8 +257,12 @@ h1 {
       }
     }
 
-    setInterval(createHeart, 150);
-    setInterval(createFireworkBurst, 2000);
+function startAnimations() {
+  setInterval(createHeart, 150);
+  setInterval(createFireworkBurst, 2000);
+}
+
     updateCountdown();
+
   </script></body>
 </html>
