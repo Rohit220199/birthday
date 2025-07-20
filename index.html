@@ -1,140 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🎉 Happy Birthday Riya 🎉</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      font-style: italic;
-      font-size: 1.4em;
-      background-color: black;
-      color: white;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      flex-direction: column;
-    }
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  font-style: italic;
+  font-size: 1.3em;
+  background-color: black;
+  color: white;
+  overflow-y: auto;               /* allow vertical scroll */
+  text-align: center;
+}
 
-    #countdown {
-      font-size: 2em;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-    }
+#mainContent {
+  display: flex;
+  background: url('https://i.postimg.cc/SRjyk3PR/Snapchat-1985575372.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 60px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
 
-    #mainContent {
-      display: none;
-      background: url('https://i.postimg.cc/SRjyk3PR/Snapchat-1985575372.jpg') no-repeat center center fixed;
-      background-size: cover;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      padding-top: 60px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
+h1 {
+  font-size: 3em;
+  text-shadow: 2px 2px 5px #000;
+  color: white;
+}
 
-    h1 {
-      font-size: 3em;
-      text-shadow: 2px 2px 5px #000;
-      color: white;
-    }
+.container {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 90%;
+  color: white;
+}
 
-    .container {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 600px;
-      width: 90%;
-      color: white;
-    }
+.cursor {
+  display: inline-block;
+  width: 10px;
+  background-color: white;
+  animation: blink 0.7s steps(1) infinite;
+}
 
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      background-color: white;
-      animation: blink 0.7s steps(1) infinite;
-    }
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
+.start-btn {
+  font-size: 1.5em;
+  background: #ffd700;
+  color: #000;
+  padding: 15px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px #fff;
+  margin-top: 20px;
+  display: none;
+}
 
-    .gift {
-      font-size: 2.2em;
-      margin-top: 20px;
-      cursor: pointer;
-      display: none;
-    }
+.start-btn:hover {
+  transform: scale(1.05);
+}
 
-    .gift:hover {
-      transform: scale(1.2);
-    }
+.slideshow {
+  position: relative;
+  margin-top: 20px;
+  width: 300px;
+  height: 200px;
+  border: 4px solid white;
+  border-radius: 20px;
+  overflow: hidden;
+  display: none;
+}
 
-    #lyrics {
-      white-space: pre-wrap;
-      margin-top: 20px;
-      display: none;
-    }
+.slideshow img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
 
-    .heart {
-      position: fixed;
-      font-size: 24px;
-      color: red;
-      animation: float 5s linear infinite;
-      z-index: 0;
-    }
+.slideshow img.active {
+  opacity: 1;
+  z-index: 1;
+}
 
-    @keyframes float {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-100vh); opacity: 0; }
-    }
+.heart {
+  position: fixed;
+  font-size: 24px;
+  color: red;
+  animation: float 5s linear infinite;
+  z-index: 0;
+}
 
-    .firework {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: yellow;
-      z-index: 10;
-      animation: explode 1s ease-out forwards;
-    }
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
 
-    @keyframes explode {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(10); }
-    }
+.firework {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: yellow;
+  z-index: 10;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(10); }
+}
+
   </style>
 </head>
 <body>
-  <div id="countdown"></div>
-
-  <div id="mainContent">
+  <div id="countdown"></div>  <div id="mainContent">
     <h1>🎉 Happy Birthday Riya 🎉</h1>
     <div class="container">
       <div id="typing"></div><div class="cursor">|</div>
-      <div id="gift" class="gift">🎁 Tap for Surprise Music</div>
-      <div id="lyrics"></div>
-      <audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-    </div>
-  </div>
+      <button class="start-btn" id="startButton" onclick="startExperience()">🎁 Tap to Start Surprise</button>
+    </div><div class="slideshow" id="slideshow">
+  <img src="assets/Snapchat-1382196981.jpg" class="active">
+  <img src="assets/Snapchat-1770425031.jpg">
+  <img src="assets/Snapchat-194146428".jpg>
+  <img src="assets/Snapchat-1999271777.jpg">
+<img src="assets/Snapchat-545597637.jpg">
+</div>
+<audio id="audio" loop>
+  <source src="assets/bday.wav" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
-  <script>
-    // Unlock at 12 July 12:35 AM local time
-    const unlockTime = new Date(2025, 6, 27, 0, 0, 0).getTime();
-// 6 = July because months are 0-based in JavaScript
-
+  </div>  <script>
+    const unlockTime = new Date(2025, 6, 17, 0, 0, 0).getTime();
     const countdownEl = document.getElementById("countdown");
     const mainEl = document.getElementById("mainContent");
+    const startBtn = document.getElementById("startButton");
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -145,7 +164,7 @@
         mainEl.style.display = "flex";
         setTimeout(typeMessage, 500);
       } else {
-const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -166,18 +185,7 @@ const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       "🎁 A surprise just for you..."
     ];
 
-    const lyrics = [
-      "🎶 Tum ho mera pyaar 💞",
-      "🎶 Tumse hai khumar 🥰",
-      "🎶 Tumko hi basaya maine yaadon mein 💖",
-      "🎶 Tum ho mere pyaar 💘"
-    ];
-
     const typingEl = document.getElementById("typing");
-    const giftEl = document.getElementById("gift");
-    const lyricsEl = document.getElementById("lyrics");
-    const audioEl = document.getElementById("audio");
-
     let msgIndex = 0;
     let charIndex = 0;
 
@@ -196,23 +204,24 @@ const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         }
       } else {
         document.querySelector('.cursor').style.display = 'none';
-        giftEl.style.display = 'block';
+        startBtn.style.display = 'inline-block';
       }
     }
 
-    giftEl.addEventListener("click", () => {
-      giftEl.style.display = "none";
-      lyricsEl.style.display = "block";
-      audioEl.play();
-      showLyrics(0);
-      startFireworks();
-    });
+    function startExperience() {
+      startBtn.style.display = 'none';
+      const audio = document.getElementById('audio');
+      const slideshow = document.getElementById('slideshow');
+      slideshow.style.display = 'block';
+      audio.play();
 
-    function showLyrics(i) {
-      if (i < lyrics.length) {
-        lyricsEl.textContent += lyrics[i] + "\n";
-        setTimeout(() => showLyrics(i + 1), 2500);
-      }
+      const images = slideshow.querySelectorAll('img');
+      let index = 0;
+      setInterval(() => {
+        images.forEach(img => img.classList.remove('active'));
+        index = (index + 1) % images.length;
+        images[index].classList.add('active');
+      }, 10000);
     }
 
     function createHeart() {
@@ -236,13 +245,8 @@ const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       }
     }
 
-    function startFireworks() {
-      createFireworkBurst();
-      setInterval(createFireworkBurst, 2000);
-    }
-
     setInterval(createHeart, 150);
+    setInterval(createFireworkBurst, 2000);
     updateCountdown();
-  </script>
-</body>
+  </script></body>
 </html>
