@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎉 Surprise 🎉</title>
 
 <style>
@@ -14,18 +14,17 @@ body {
   background: black;
   color: white;
   text-align: center;
-  overflow-y: auto;
 }
 
 #countdown {
   font-size: 2em;
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
+  padding: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px;
 }
 
 #lockScreen {
@@ -33,7 +32,6 @@ body {
   position: fixed;
   inset: 0;
   background: black;
-  color: white;
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -62,12 +60,195 @@ body {
 .cursor {
   display: inline-block;
   width: 10px;
-  background-color: white;
+  background: white;
   animation: blink 0.7s steps(1) infinite;
 }
 
 @keyframes blink {
   0%,100% {opacity:1}
+  50% {opacity:0}
+}
+
+.start-btn {
+  font-size: 1.5em;
+  background: gold;
+  padding: 15px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.slideshow {
+  display: none;
+  margin-top: 20px;
+  width: 300px;
+  height: 200px;
+  border: 4px solid white;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.slideshow img.active {
+  opacity: 1;
+}
+
+.heart {
+  position: fixed;
+  color: red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  from {transform: translateY(0); opacity:1}
+  to {transform: translateY(-100vh); opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div id="countdown"></div>
+
+<!-- 🔐 PASSWORD SCREEN -->
+<div id="lockScreen">
+  <h2>🔐 Enter Secret Password</h2>
+  <input id="pwd" type="password" placeholder="Password"
+    style="padding:10px;font-size:1.2em;border-radius:10px;">
+  <button onclick="unlock()"
+    style="margin-top:15px;padding:10px 25px;font-size:1.1em;border-radius:15px;">
+    Unlock ❤️
+  </button>
+  <p id="err" style="color:red;"></p>
+</div>
+
+<!-- 🎉 MAIN CONTENT -->
+<div id="mainContent">
+  <h1>🎉 Happy Birthday Riya 🎉</h1>
+  <div class="container">
+    <div id="typing"></div><div class="cursor">|</div>
+    <button class="start-btn" id="startButton" onclick="startExperience()">🎁 Tap to Start Surprise</button>
+  </div>
+
+  <div class="slideshow" id="slideshow">
+    <img src="assets/Snapchat-1382196981.jpg" class="active">
+    <img src="assets/Snapchat-1770425031.jpg">
+    <img src="assets/Snapchat-194146428.jpg">
+    <img src="assets/Snapchat-1999271777.jpg">
+    <img src="assets/Snapchat-545597637.jpg">
+  </div>
+
+  <audio id="audio" loop>
+    <source src="assets/bday.wav" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+// 🔑 SIMPLE PASSWORD
+const SECRET_PASSWORD = "riya123";
+
+// ⏳ TIMER
+const unlockTime = new Date(2025, 6, 27, 0, 0, 0).getTime();
+const countdownEl = document.getElementById("countdown");
+const lockEl = document.getElementById("lockScreen");
+const mainEl = document.getElementById("mainContent");
+
+function updateCountdown() {
+  const now = Date.now();
+  const diff = unlockTime - now;
+  if (diff <= 0) {
+    countdownEl.style.display = "none";
+    lockEl.style.display = "flex";
+  } else {
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    countdownEl.innerHTML = `⏳ Unlocking in ${d}d ${h}h ${m}m ${s}s`;
+    setTimeout(updateCountdown, 1000);
+  }
+}
+updateCountdown();
+
+// 🔓 PASSWORD CHECK
+function unlock() {
+  const val = document.getElementById("pwd").value;
+  if (val === SECRET_PASSWORD) {
+    lockEl.style.display = "none";
+    mainEl.style.display = "flex";
+    setTimeout(typeMessage, 500);
+    startAnimations();
+  } else {
+    document.getElementById("err").innerText = "❌ Wrong password";
+  }
+}
+
+// ✍️ TYPING MESSAGES
+const messages = [
+  "🎂 Happy Birthday My Love ❤️",
+  "🌟 I love you jaan...",
+  "💖 I'm missing you ...",
+  "Tu hai toh sab kuch perfect lagta hai 💕",
+  "You're the reason for my smile 😘",
+  "🎁 A surprise just for you..."
+];
+
+let i=0,j=0;
+const typingEl = document.getElementById("typing");
+
+function typeMessage() {
+  if (i < messages.length) {
+    if (j < messages[i].length) {
+      typingEl.textContent += messages[i][j++];
+      setTimeout(typeMessage, 50);
+    } else {
+      typingEl.textContent += "\n";
+      i++; j=0;
+      setTimeout(typeMessage, 800);
+    }
+  } else {
+    document.querySelector(".cursor").style.display="none";
+    document.getElementById("startButton").style.display="inline-block";
+  }
+}
+
+// 🎵 EXPERIENCE
+function startExperience() {
+  document.getElementById("audio").play();
+  const slides = document.querySelectorAll(".slideshow img");
+  document.getElementById("slideshow").style.display="block";
+  let idx=0;
+  setInterval(()=>{
+    slides.forEach(i=>i.classList.remove("active"));
+    idx=(idx+1)%slides.length;
+    slides[idx].classList.add("active");
+  },8000);
+}
+
+// ❤️ HEARTS
+function startAnimations() {
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  },200);
+}
+</script>
+
+</body>
+</html>  0%,100% {opacity:1}
   50% {opacity:0}
 }
 
